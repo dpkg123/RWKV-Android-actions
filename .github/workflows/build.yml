@@ -38,6 +38,7 @@ jobs:
        - name: Build with Gradle 
          run: | 
            cd source
+           sudo chmod 777 -R -v ./*
            echo 'org.gradle.parallel=true' >> gradle.properties 
            echo 'org.gradle.vfs.watch=true' >> gradle.properties 
            echo 'org.gradle.jvmargs=-Xmx2048m' >> gradle.properties 
