@@ -28,7 +28,7 @@ jobs:
 
        - name: Pull Source Code
          run: |
-           sudo apt install aria2c -y
+           sudo apt install aria2 -y
            git clone https://github.com/ZTMIDGO/RWKV-Android/ source
 
        - name: Pull Model
