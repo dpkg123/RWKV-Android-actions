@@ -1,7 +1,7 @@
-name: build manager
+name: build APK
 
 on:
-
+  push:
   workflow_dispatch:
 
 jobs:
@@ -33,12 +33,12 @@ jobs:
 
        - name: Pull Model
          run: |
-           aria2c -d source/app/src/main/assets/model https://huggingface.co/TIEMING/rwkv-world-0.4B-onnx/resolve/main/model.onnx
+           aria2c -o model.onnx -d source/app/src/main/assets/model https://huggingface.co/TIEMING/rwkv-world-0.4B-onnx/resolve/main/model.onnx
 
        - name: Build with Gradle 
          run: | 
            cd source
-           sudo chmod 777 -R -v ./* 
+           sudo chmod 777 -R ./* 
            ./gradlew clean assembleRelease 
   
        - name: Upload build artifact 
