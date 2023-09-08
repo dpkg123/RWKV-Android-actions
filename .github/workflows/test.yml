@@ -1,0 +1,44 @@
+name: build APK
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+
+  build-apk:
+    runs-on: ubuntu-latest
+    
+    steps: 
+       - name: Checkout Repo
+         uses: actions/checkout@v4
+         with: 
+           fetch-depth: 0
+
+       - name: Setup Java 
+         uses: actions/setup-java@v3 
+         with: 
+           distribution: "temurin" 
+           java-version: "20" 
+  
+       - name: Setup Gradle 
+         uses: gradle/gradle-build-action@v2 
+         with: 
+           gradle-home-cache-cleanup: true
+
+       - name: Pull Source Code
+         run: |
+           sudo apt install aria2 -y
+           git clone https://github.com/10miaomiao/bilimiao2 source
+
+       - name: Build with Gradle 
+         run: | 
+           cd source
+           sudo chmod 777 -R ./* 
+           ./gradlew clean assembleRelease 
+  
+       - name: Upload build artifact 
+         uses: actions/upload-artifact@v3 
+         with: 
+           name: build
+           path: source/app/build/outputs/apk/release/*.apk
