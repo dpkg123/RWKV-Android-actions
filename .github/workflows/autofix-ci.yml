@@ -1,7 +1,6 @@
 name: autofix.ci
 
 on:
-  push:
   workflow_dispatch:
 
 jobs:
