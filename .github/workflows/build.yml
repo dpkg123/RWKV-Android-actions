@@ -9,6 +9,10 @@ jobs:
 
   build-apk:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        version: [temurin, zulu]
     
     steps: 
        - name: Checkout Repo
@@ -19,7 +23,7 @@ jobs:
        - name: Setup Java 
          uses: actions/setup-java@v4 
          with: 
-           distribution: "temurin" 
+           distribution: "${{ matrix.version }}" 
            java-version: "17" 
   
        - name: Setup Gradle 
