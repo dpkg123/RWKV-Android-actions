@@ -49,5 +49,5 @@ jobs:
        - name: Upload build artifact 
          uses: actions/upload-artifact@v4 
          with: 
-           name: build
+           name: build-${{ matrix.version }}-${{ github.sha }}
            path: source/app/build/outputs/apk/release/*.apk
