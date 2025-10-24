@@ -47,7 +47,7 @@ jobs:
            ./gradlew clean assembleRelease 
   
        - name: Upload build artifact 
-         uses: actions/upload-artifact@v4 
+         uses: actions/upload-artifact@v5 
          with: 
            name: build-${{ matrix.version }}-${{ github.sha }}
            path: source/app/build/outputs/apk/release/*.apk
